@@ -1,3 +1,6 @@
+#ifndef DEALLOCATOR_HPP
+#define DEALLOCATOR_HPP
+
 #include <iostream>
 
 namespace deallocator{
@@ -95,3 +98,5 @@ namespace deallocator{
         return 0;
     }
 }
+
+#endif

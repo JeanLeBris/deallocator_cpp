@@ -19,7 +19,7 @@ namespace deallocator{
     };
 
     /**
-     * Declares a new garbage can
+     * Declares a new empty garbage can
      */
     Garbage::Garbage(){
         this->length = 0;

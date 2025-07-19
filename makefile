@@ -33,7 +33,6 @@ clean:
 	$(RMDIR) $(OBJDIR)
 	$(RMFILE) $(BINDIR)
 	$(RMDIR) $(BINDIR)
-	@(cd $(EXAMPLESDIR) && $(MAKE) $@)
 
 
 

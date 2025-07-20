@@ -22,8 +22,22 @@ export RMFILE
 export COPYFILE
 export SHARED_LIBRARY_EXT
 
+ifeq ($(LIBRARY_TYPE), shared)
+else
+	ifeq ($(LIBRARY_TYPE), static)
+	else
+		LIBRARY_TYPE=shared
+	endif
+endif
+export LIBRARY_TYPE
+
 compile:bin obj $(OBJNAMES)
+ifeq ($(LIBRARY_TYPE), shared)
 	$(CC) -fpic -shared $(OBJ) -o $(BINDIR)/lib$(EXEC).$(SHARED_LIBRARY_EXT)
+endif
+ifeq ($(LIBRARY_TYPE), static)
+	ar rcs $(BINDIR)/lib$(EXEC).a $(OBJ)
+endif
 
 %.o:
 	$(CC) -c $(SRCDIR)/$(@:.o=.cpp) -o $(OBJDIR)/$@

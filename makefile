@@ -10,12 +10,20 @@ export OBJDIR=obj
 OBJ= $(foreach objname, $(OBJNAMES), $(OBJDIR)/$(objname))
 export BINDIR=bin
 
-export RMDIR= rmdir
-export RMFILE= del /s /q
-export COPYFILE= copy
+ifeq ($(OS), Windows_NT)
+	RMDIR= rmdir
+	RMFILE= del /s /q
+	COPYFILE= copy
+	SHARED_LIBRARY_EXT= dll
+endif
+
+export RMDIR
+export RMFILE
+export COPYFILE
+export SHARED_LIBRARY_EXT
 
 compile:bin obj $(OBJNAMES)
-	$(CC) -fpic -shared $(OBJ) -o $(BINDIR)/lib$(EXEC).dll
+	$(CC) -fpic -shared $(OBJ) -o $(BINDIR)/lib$(EXEC).$(SHARED_LIBRARY_EXT)
 
 %.o:
 	$(CC) -c $(SRCDIR)/$(@:.o=.cpp) -o $(OBJDIR)/$@

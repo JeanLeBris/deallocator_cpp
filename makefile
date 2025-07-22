@@ -58,9 +58,9 @@ obj:
 	mkdir obj
 
 clean:
-	- $(RMFILE) $(OBJDIR)
+	- $(RMFILE) $(OBJDIR)/*
 	- $(RMDIR) $(OBJDIR)
-	- $(RMFILE) $(BINDIR)
+	- $(RMFILE) $(BINDIR)/*
 	- $(RMDIR) $(BINDIR)
 
 

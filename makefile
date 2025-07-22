@@ -15,6 +15,13 @@ ifeq ($(OS), Windows_NT)
 	RMFILE= del /s /q
 	COPYFILE= copy
 	SHARED_LIBRARY_EXT= dll
+else
+ifeq ($(OS), Linux)
+	RMDIR= rmdir
+	RMFILE= rm
+	COPYFILE= cp
+	SHARED_LIBRARY_EXT= so
+endif
 endif
 
 export RMDIR
@@ -51,10 +58,10 @@ obj:
 	mkdir obj
 
 clean:
-	$(RMFILE) $(OBJDIR)
-	$(RMDIR) $(OBJDIR)
-	$(RMFILE) $(BINDIR)
-	$(RMDIR) $(BINDIR)
+	- $(RMFILE) $(OBJDIR)
+	- $(RMDIR) $(OBJDIR)
+	- $(RMFILE) $(BINDIR)
+	- $(RMDIR) $(BINDIR)
 
 
 

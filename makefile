@@ -10,7 +10,16 @@ export OBJDIR=obj
 OBJ= $(foreach objname, $(OBJNAMES), $(OBJDIR)/$(objname))
 export BINDIR=bin
 
+ifeq ($(OS), Windows)
+	RMDIR= rmdir
+	RMFILE= del /s /q
+	COPYFILE= copy
+	SHARED_LIBRARY_EXT= dll
+	FILE_SLASH=\\
+
+else
 ifeq ($(OS), Windows_NT)
+	OS=Windows
 	RMDIR= rmdir
 	RMFILE= del /s /q
 	COPYFILE= copy
@@ -24,6 +33,7 @@ ifeq ($(OS), Linux)
 	COPYFILE= cp
 	SHARED_LIBRARY_EXT= so
 	FILE_SLASH=/
+endif
 endif
 endif
 
@@ -44,7 +54,7 @@ export LIBRARY_TYPE
 
 compile:bin obj $(OBJNAMES)
 ifeq ($(LIBRARY_TYPE), shared)
-ifeq ($(OS), Windows_NT)
+ifeq ($(OS), Windows)
 	$(CC) -fpic -shared $(OBJ) -o $(BINDIR)/lib$(EXEC).$(SHARED_LIBRARY_EXT)
 endif
 ifeq ($(OS), Linux)
@@ -57,7 +67,7 @@ endif
 
 %.o:
 ifeq ($(LIBRARY_TYPE), shared)
-ifeq ($(OS), Windows_NT)
+ifeq ($(OS), Windows)
 	$(CC) -c $(SRCDIR)/$(@:.o=.cpp) -o $(OBJDIR)/$@
 endif
 ifeq ($(OS), Linux)

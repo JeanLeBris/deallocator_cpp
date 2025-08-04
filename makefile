@@ -1,5 +1,5 @@
 .PHONY: compile examples clean
-.SILENT: compile examples clean
+# .SILENT: compile examples clean
 
 export CC=g++
 export CFLAGS=

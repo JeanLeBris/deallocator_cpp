@@ -1,3 +1,6 @@
+.PHONY: compile examples clean
+.SILENT: compile examples clean
+
 export CC=g++
 export CFLAGS=
 export LDFLAGS=
@@ -77,8 +80,6 @@ endif
 ifeq ($(LIBRARY_TYPE), static)
 	$(CC) -c $(SRCDIR)/$(@:.o=.cpp) -o $(OBJDIR)/$@
 endif
-
-.PHONY: compile examples clean
 
 bin:
 	mkdir bin
